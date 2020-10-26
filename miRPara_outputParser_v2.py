@@ -36,7 +36,7 @@ def getMirParaDict(miRParaOut):
 def findHighestSvmProb(recList):
     svmProbList = []
     for r in recList:
-        svmProbList.append(float(r.split("\t")[-1]))
+        svmProbList.append(float(r.split("\t")[4]))
     maxIndex = svmProbList.index(max(svmProbList))
     return str(recList[maxIndex])
 
@@ -68,12 +68,6 @@ def getStEnDescr(oneMiRnaItem, headerKeys):
     seList[1] = int(seList[0]) + int(teSeList[2].split("_")[1])
     faHeader = getHeader(teSeList[0], headerKeys)
     return "{}\t{}\t{}\t{}\n".format(faHeader, str(seList[0]), str(seList[1]), ";".join(recList[1:]))
-
-# def getStartEndRecalc(header35pList):
-#     outList = []    # output: 'seqName\tstart\tend\t11943-12039:21_20;seq;5/3P;SVMprob=0.855993'
-#     for rec in header35pList:
-#         outList.append(getStEnDescr(oneMiRnaItem))
-#     return outList
 
 def addHeaderOutput(bestMiRnasDict, headerKeys, miRParaOut): 
     # print out file of filtered miRNAs with the highest SVMprob
