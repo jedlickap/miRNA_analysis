@@ -123,6 +123,11 @@ def walkThroughFa(allTesFa, filtMiRParaBed, protGff):
             out2.write("{}\t{}\t{}\tmiRNA\t{}\t{}\n".format(spec, fam, famDict[fam]['miRnaTes'], str(percMiRnaTes), famDict[fam]['miRnas']))
             out2.write("{}\t{}\t{}\tnoMiRNA\t{}\t0\n".format(spec, fam, famDict[fam]['noMiRnaTes'], str(round(100 - percMiRnaTes, 2))))
 
+    outTabName = allTesFa.replace(".fa","_miRnas.tsv")
+    with open(outTabName, "w") as out:
+        for k in sorted(outDict.keys()):
+            out.write("{}\t{}\t{}\t{}\n".format("\t".join(k.split("|")), str(outDict[k]['LTR']), str(outDict[k]['IN']), str(outDict[k]['LTR'] + outDict[k]['IN'])))
+
 def main(allTesFa, filtMiRParaBed, protGff):
     walkThroughFa(allTesFa, filtMiRParaBed, protGff)
 
