@@ -137,11 +137,14 @@ def getAllDomsDict(gff, inDict, miRnaBed, outFolder):
                     if teID not in allDomsDict[ch].keys():
                         allDomsDict[ch][teID] = {}
                         allDomsDict[ch][teID] = inDict[ch][teID]
-    with open(outFolder + "/" + allProtDomTesBed_name,"w") as bedOut:
+    currDir = os.getcwd()
+    os.chdir(outFolder)
+    with open(allProtDomTesBed_name,"w") as bedOut:
         for l in bedOutList:
             bedOut.write(l)
     os.chmod(allProtDomTesBed_name, 0o777)                        
     teCnt = 0
+    os.chdir(currDir)
     for ch in allDomsDict.keys():
         teCnt += len(allDomsDict[ch].keys())        
     print("Number of TEs with all protDoms in {}: {} ({} miRNAs)".format(gff, teCnt, cnt))
@@ -172,12 +175,13 @@ def getAllDomsGffFa(allProtDomTesBed_name, gff, tesFa, miRnaFa, preMiRnaFa, outF
     faOutName = outFolder + allProtDomTesBed_name.replace(".bed",".fa")
     miRnaFaOutName = outFolder + miRnaFa.replace(".fa","_allProtDomTes.fa")
     preMiRnaFaOutName =outFolder + preMiRnaFa.replace(".fa","_allProtDomTes.fa")
+    allProtDomTesBed_name = outFolder + allProtDomTesBed_name
     headList = []
     with open(allProtDomTesBed_name) as allProtDomTesBed:
         for rec in allProtDomTesBed:
             headList.append(rec.split("\t")[0])
     headListUniq = list(set(headList))
-    # generate allProtDomTesFa    
+    # generate allProtDomTesFa  
     printOutFasta(tesFa, faOutName, headListUniq)
     printOutFasta(miRnaFa, miRnaFaOutName, headListUniq)
     printOutFasta(preMiRnaFa, preMiRnaFaOutName, headListUniq)
