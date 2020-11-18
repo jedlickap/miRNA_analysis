@@ -111,7 +111,7 @@ def miRnaCoordInTe(te, teBasicDict, miRnasProtDomBed):
                 miRnasList.append(rec)
     for miRna in miRnasList:
         start, end = int(miRna.split("\t")[1]), int(miRna.split("\t")[2])
-        teMiRnasOutList.append(miRna.split("\t")[0] + "\t" + posFinder(start, end, teBasicDict) + 
+        teMiRnasOutList.append(miRna.split("\t")[0].replace("|", "\t") + "\t" + posFinder(start, end, teBasicDict) + 
         "\t" + str(start) + "\t" + str(end) + "\t" + miRna.split("\t")[3].rstrip())                                        # fragName, fragLen, miRnaRelPos
     return teMiRnasOutList        
 
@@ -143,8 +143,13 @@ def getMiRnaPos(miRnasProtDomBed, allProtDomTesGff):
                 teBasicDict = fillTeDict(famFragsDict[superFam][1], te, allProtDomTesGff)
                 # here to add line prep for TE frag lengths!
                 outputList.append(miRnaCoordInTe(te, teBasicDict, miRnasProtDomBed))
-    for l1 in outputList:
-        for l2 in l1:
-            print(l2)
+    
+    # get tsv tab le output:
+    spec = miRnasProtDomBed.split("_")[0]
+    outName = spec + "_miRNA_accuratePosInTe.tsv"
+    with open(outName, "w") as out:
+        for l1 in outputList:
+            for l2 in l1:
+                out.write(l2 + "\n")
                         
 getMiRnaPos(miRnasProtDomBed, allProtDomTesGff)
