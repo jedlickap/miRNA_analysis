@@ -24,6 +24,6 @@ miRNA_analysis
 
 ### 4. exactMiRnaPosInTe
 
-*This script scritp checks the accurate position of filtered miRNAs and then returns output tables '\*_miRNA_accuratePosInTe.tsv'*
+*This script scritp checks the accurate position of filtered miRNAs and then returns output tables '\*_miRNA_accuratePosInTe.tsv'. Should be run within 'tesWithAllProtDom_outputs/' folder*
 
 > $ python3 /home/pavel/Documents/Soft/miRNA_analysis/3_exactMiRnaPosInTe.py *_filtered_allProtDomTes.bed *_filtered_allProtDomTes.gff
