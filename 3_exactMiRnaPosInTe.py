@@ -152,4 +152,5 @@ def getMiRnaPos(miRnasProtDomBed, allProtDomTesGff):
             for l2 in l1:
                 out.write(l2 + "\n")
                         
-getMiRnaPos(miRnasProtDomBed, allProtDomTesGff)
+if __name__ = "__main__":
+    getMiRnaPos(miRnasProtDomBed, allProtDomTesGff)
