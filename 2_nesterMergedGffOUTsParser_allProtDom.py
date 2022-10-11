@@ -204,11 +204,12 @@ def getAllDomsGffFa(allProtDomTesBed_name, gff, tesFa, miRnaFa, preMiRnaFa, outF
     os.chmod(gffOutName, 0o777)
     return gffOutName
 
-# create output folder
-outFolder = mkdirForOut()      
-# get Gff into dictionary
-inDict = fillInDict(gff)
-# print out bed file for miRNA in TEs with all prot. domain only filtered gff dictionary 
-allDomsDict, allProtDomTesBed_name = getAllDomsDict(gff, inDict, miRnaBed, outFolder)
-# print gff and fasta file filtered for TEs with miRNAs, miRNAs, premiRNAs all with all prot. domain only filtered gff dictionary 
-gffOutName = getAllDomsGffFa(allProtDomTesBed_name, gff,tesFa, miRnaFa, preMiRnaFa, outFolder)
+if __name__ = "__main__":
+    # create output folder
+    outFolder = mkdirForOut()      
+    # get Gff into dictionary
+    inDict = fillInDict(gff)
+    # print out bed file for miRNA in TEs with all prot. domain only filtered gff dictionary 
+    allDomsDict, allProtDomTesBed_name = getAllDomsDict(gff, inDict, miRnaBed, outFolder)
+    # print gff and fasta file filtered for TEs with miRNAs, miRNAs, premiRNAs all with all prot. domain only filtered gff dictionary 
+    gffOutName = getAllDomsGffFa(allProtDomTesBed_name, gff,tesFa, miRnaFa, preMiRnaFa, outFolder)
